@@ -1,12 +1,24 @@
+@import '~antd/dist/antd.css';
 .App {
   text-align: center;
+  min-height: 100vh;
+  padding-bottom: 69px;
+  position: relative;
+  overflow: hidden;
+  display: block;
 }
-
+.content {
+  min-height: calc(100vh - (64px + 69px));
+  background-color: white;
+  padding: 20px 0;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
-
+.ant-layout {
+  background-color: #e2e8f1;
+}
 .App-header {
   background-color: #222;
   height: 150px;
@@ -21,7 +33,17 @@
 .App-intro {
   font-size: large;
 }
-
+.footer {
+  background-color: black;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.card-item {
+  margin: auto;
+  margin-bottom: 20px;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

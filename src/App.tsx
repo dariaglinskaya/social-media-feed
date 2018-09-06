@@ -1,19 +1,35 @@
+import { Col, Layout, Row } from 'antd';
 import * as React from 'react';
 import './App.css';
 
-import logo from './logo.svg';
+import { CardItem } from './containers/CardItem';
+import { Search } from './containers/Search';
+
+const { Header, Footer, Content } = Layout;
 
 class App extends React.Component {
   public render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <Layout>
+          <Header>
+            <Row>
+              <Col span={14} offset={5}>
+                <Search />
+              </Col>
+            </Row>
+          </Header>
+          <Row>
+            <Col span={14} offset={5}>
+              <Content className="content">
+                <CardItem />
+                <CardItem />
+                <CardItem />
+              </Content>
+            </Col>
+          </Row>
+          <Footer className="footer">Footer</Footer>
+        </Layout>
       </div>
     );
   }
