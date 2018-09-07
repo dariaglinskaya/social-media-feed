@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
     "instagram-node": "^0.5.8",
     "inversify": "^4.13.0",
     "inversify-express-utils": "^6.1.0",

@@ -11,12 +11,16 @@ export class FeedService implements IFeedService {
             client_id:  '4486b6d357a24d52b84d937bbfa80e4e',
             client_secret: 'f019457dfef44b0b8162176ea060aa5a'
         });
-        return new Promise<ICard>((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             instagram.get('tags/search', { q: 'paris' }).then(data => {
                 console.log(data);
+                console.log('+')
                 resolve(data);
               })
-              .catch((err) => reject(err));
+              .catch((err) => {
+                console.log('service error')  
+                reject(err)
+            });
         });
     }
     getFeedsTwitter(url): Promise<ICard> {
