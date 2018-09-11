@@ -11,8 +11,8 @@ import { injectable, inject } from "inversify";
 import * as instagram from 'instagram-node';
 var ig = instagram.instagram();
 ig.use({
-    client_id:  '4486b6d357a24d52b84d937bbfa80e4e',
-    client_secret: 'f019457dfef44b0b8162176ea060aa5a'
+    client_id: 'bb70807d70154d83ada0d4ddc8492fdb',
+    client_secret: '5ca6066ad3e8473e86d8d76fd46f618d'
 });
 @controller('/feed')
 class FeedController {
@@ -21,26 +21,18 @@ class FeedController {
     constructor(@inject(TYPES.FeedService) private feedService: IFeedService) {
         this._feedService = feedService;
     }
+    @httpPost('/auth_instagram')
+    private auth_instagram(@request() req, @response() res) {
+        console.log(req.body)
+    }
 
     @httpPost('/instagram')
-    private instagram(@request() req, @response() res) {
-        res.redirect(ig.get_authorization_url('https://localhost:3000/', { scope : ['public_content','likes']}) );
-        ig.authorize_user(req.query.code, 'https://localhost:3000/', function(err, result){
-        // store this access_token in a global variable called accessToken
-            const accessToken = result;
-        // After getting the access_token redirect to the '/' route 
-           console.log(result)
+    async instagram(@request() req, @response() res) {
+        const data = await this._feedService.getFeedsInstagram(req.body[0]).then((result) => {
+            console.log(result);
+            res.json(result);
         });
-        console.log('instagram')
-        console.log(req.body)
-        this._feedService.getFeedsInstagram(req.body).then((cards) => {
-            console.log(cards)
-            console.log('good')
-            res.send(cards);
-        }).catch((error) => {
-            console.log('error')
-            //res.sendStatus(400);
-        });
+        
     }
     @httpPost('/twitter')
     private twitter(@request() req, @response() res) {
