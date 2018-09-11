@@ -1,4 +1,4 @@
-import { Col, Layout, Row, Select, Button, Icon } from 'antd';
+import { Col, Layout, Row, Select, Button, Icon, Spin } from 'antd';
 import * as React from 'react';
 import './App.css';
 import { bindActionCreators } from 'redux';
@@ -16,13 +16,16 @@ interface IProps {
   instagram?: any;
   twitter?: any;
   vk?: any;
+  isLoading: boolean;
+  cards: any;
 }
 class Home extends React.Component<IProps, any> {
   constructor(props) {
     super(props);
   }
-  public instagram() {
-
+  public instagram(e) {
+    this.props.instagram();
+    e.preventDefault();
   }
   public twitter() {
     this.props.twitter();
@@ -31,7 +34,14 @@ class Home extends React.Component<IProps, any> {
     this.props.vk();
   }
   public componentDidMount() {
-    this.props.instagram(window.location.href.slice(-32));
+    
+  }
+  public renderCards() {
+    const cards = this.props.cards;
+    return cards.map((card, index) => {
+      return <CardItem key={index}
+        {...card.node} />
+    });
   }
   public render() {
     return (
@@ -46,13 +56,11 @@ class Home extends React.Component<IProps, any> {
           </Header>
           <Row>
             <Col span={14} offset={5}>
-              <Button href="https://api.instagram.com/oauth/authorize/?client_id=bb70807d70154d83ada0d4ddc8492fdb&amp;redirect_uri=http://localhost:3000/&amp;response_type=token&amp;scope=public_content" onClick={this.instagram.bind(this)}><Icon type="instagram" theme="outlined" /></Button>
-              <Button onClick={this.twitter}><Icon type="twitter" theme="outlined" /></Button>
-              <Button onClick={this.vk}><Icon type="bold" theme="outlined" /></Button>
+              <Button href="https://api.instagram.com/oauth/authorize/?client_id=bb70807d70154d83ada0d4ddc8492fdb&amp;redirect_uri=http://localhost:3000/&amp;response_type=token&amp;scope=public_content" ><Icon type="instagram" theme="outlined" /></Button>
+              <Button href='https://api.twitter.com/oauth/authenticate?oauth_token=Z6eEdO8MOmk394WozF5oKyuAv855l4Mlqo7hhlSLik'><Icon type="twitter" theme="outlined" /></Button>
+              <Button onClick={this.vk}><Icon type="bold" theme="outlined" /></Button>              
               <Content className="content">
-                <CardItem />
-                <CardItem />
-                <CardItem />
+                {this.props.isLoading ? <Spin /> : this.renderCards()}
               </Content>
             </Col>
           </Row>
@@ -64,7 +72,8 @@ class Home extends React.Component<IProps, any> {
 }
 const mapStateToProps = state => {
   return {
-    cards: state.cards
+    cards: state.cards,
+    isLoading: state.isLoading
   };
 };
 const mapDispatchToProps = dispatch => {

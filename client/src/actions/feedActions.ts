@@ -13,7 +13,7 @@ function instagram(code) {
     const code2 = { code: code }
     console.log(code)
     return (dispatch) => {
-        dispatch(cardsIsLoading());
+        dispatch(instagramIsLoading());
         axios({
             method: 'post',
             url: '/feed/auth_instagram',
@@ -71,26 +71,24 @@ function vk() {
 function renderInstagramPost(tag) {
     return (dispatch) => {
         dispatch(cardsIsLoading());
-        axios({
-            method: 'post',
-            url: '/feed/instagram',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Access-Control-Allow-Methods': 'DELETE, HEAD, GET, OPTIONS, POST, PUT'
-            },
-            data: tag
-        })
+        console.log(`https://www.instagram.com/explore/tags/${tag}/?__a=1`)
+        axios.get(`https://www.instagram.com/explore/tags/${tag}/?__a=1`)
+            .catch(() => dispatch(renderCardsFailure()))
             .then((response) => {
-                console.log(response)
-                dispatch(renderCardsSuccess(response.data));
+                dispatch(renderCardsSuccess(response.data.graphql.hashtag.edge_hashtag_to_media.edges));
             })
-            .catch(() => dispatch(renderCardsFailure()));
+            
     };
 }
 function cardsIsLoading() {
     return {
         type: feedConstant.CARDS_IS_LOADING,
+        isLoading: true
+    };
+}
+function instagramIsLoading() {
+    return {
+        type: feedConstant.INSTAGRAM_IS_LOADING,
         isLoading: true
     };
 }

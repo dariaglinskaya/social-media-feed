@@ -1,19 +1,25 @@
 import { injectable, inject } from 'inversify';
 import { IFeedService, ICard } from '../interfaces/interfaces';
-import * as instagram from 'instagram-node';
-
+//import * as instagram from 'instagram-node';
+const instagram = require('public-instagram');
 @injectable()
 export class FeedService implements IFeedService {
 
     async getFeedsInstagram(tag): Promise<any> {
-        var ig = instagram.instagram();
-        ig.use({
-            client_id: 'bb70807d70154d83ada0d4ddc8492fdb',
-            client_secret: '5ca6066ad3e8473e86d8d76fd46f618d'
-        });
-        ig.use({ access_token: '311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f' });
-        return await new Promise((resolve, reject) => {
-            ig.tag_media_recent(tag, (err, result) => {
+        //var ig = instagram.instagram();
+        //ig.use({ access_token: '311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f' });
+        const result = await instagram.tags.recent(tag, 10);
+        console.log(result)
+        return result;
+        /*return await new Promise((resolve, reject) => {
+            
+            console.log(result)
+            if (result) {
+                resolve(result);
+            } else {
+                reject();
+            }
+            ig.tag_media_recent(tag, { count: 50 }, (err, result) => {
                 if (!err) {
                     resolve(result);
                 } else {
@@ -21,7 +27,7 @@ export class FeedService implements IFeedService {
                     reject(err.error_message);
                 }
             })
-        })
+        })*/
     }
     getFeedsTwitter(url): Promise<ICard> {
         var ig = instagram.instagram();

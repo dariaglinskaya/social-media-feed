@@ -3,7 +3,6 @@ import * as ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Home';
 import store from "./store";
-import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -17,11 +16,7 @@ export default class App extends React.Component<IAppProps, {}> {
   public render() {
     return (
       <div className="App">
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Home} />
-          </Switch>
-        </Router >
+        <Home />
       </div>
     );
   }

@@ -1,20 +1,27 @@
-import { Avatar, Card, Icon } from 'antd';
+import {  Card, Icon } from 'antd';
 import * as React from 'react';
 
 const { Meta } = Card;
-export class CardItem extends React.Component<{}> {
+export interface IProps {
+    edge_media_to_caption: any;
+    display_url: any;
+    caption: any;
+    images: any;
+    likes: any;
+    comments: any;
+}
+export class CardItem extends React.Component<IProps,{}> {
     public render() {
+        {console.log(this.props)}
         return (
             <Card
                 style={{ "width": "80%" }}
-                cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
-                actions={[<Icon type="setting"  key={1}/>, <Icon type="edit"  key={2}/>, <Icon type="ellipsis"  key={3} />]}
-                className="card-item"               
-            >
+                cover={<img alt="example" src={this.props.display_url} />}
+                actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
+                className="card-item"
+            >                
                 <Meta
-                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                    title="Card title"
-                    description="This is the description"
+                    description={this.props.edge_media_to_caption.edges[0].node.text}
                 />
             </Card>
         )
