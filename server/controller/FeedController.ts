@@ -1,4 +1,4 @@
-import { IFeedService } from '../interfaces/interfaces';
+import { IFeedService, ICard } from '../interfaces/interfaces';
 import {
     Request as req,
     Response as res,
@@ -13,7 +13,7 @@ import * as instagram from 'instagram-node';
 @controller('/feed')
 class FeedController {
     private _feedService: IFeedService;
-
+    private _cardsService: ICard;
     constructor(@inject(TYPES.FeedService) private feedService: IFeedService) {
         this._feedService = feedService;
     }
@@ -39,12 +39,15 @@ class FeedController {
         });
     }
     @httpPost('/vk')
-    private vk(@request() req, @response() res) {
-        this._feedService.getFeedsVk(req.body).then((cards) => {
-            res.send(cards);
+    async vk(@request() req, @response() res) {
+        console.log(req.body)
+        await this._feedService.getFeedsVk(req.body).then((cards) => {
+            console.log(cards);
+            res.send(cards.items);
         }).catch((error) => {
+            console.log('error!!!!')
             res.send(error);
-        });
+        })
     }
 }
 export default FeedController;

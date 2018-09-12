@@ -18,10 +18,12 @@
     "inversify-express-utils": "^6.1.0",
     "node-instagram": "^4.1.0",
     "node-ts": "^2.1.2",
+    "node-vkapi": "^3.0.7",
     "nodemon": "^1.18.4",
-    "public-instagram": "git+https://github.com/ivolimasilva/public-instagram.git",
+    "public-instagram": "https://github.com/ivolimasilva/public-instagram.git",
     "reflect-metadata": "^0.1.12",
-    "typescript": "^3.0.3"
+    "typescript": "^3.0.3",
+    "vkflow": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^10.9.4"

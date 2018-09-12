@@ -46,7 +46,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        fetchData: (tag) => dispatch(feedActions.renderInstagramPost(tag))
+        fetchData: (tag) => dispatch(feedActions.renderVKPost(tag))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

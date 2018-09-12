@@ -1,20 +1,18 @@
-export interface IFeed {
-    cards: ICard[];
-}
+
 export interface ICard {
     username: string;
     profile_picture: string;
     image: string;
-    tags: string[];
     likes: number;
-    location: string;
     text: string;
+    instagramConvert: (card: any) => ICard;
+    vkConvert: (card: any) => ICard;
 }
 
 export interface IFeedService {
-    getFeedsInstagram: (url: string) => Promise<ICard>;
-    getFeedsTwitter: (url: string) => Promise<ICard>;
-    getFeedsVk: (url: string) => Promise<ICard>;
+    getFeedsInstagram: (url: string) => Promise<ICard[]>;
+    getFeedsTwitter: (url: string) => Promise<ICard[]>;
+    getFeedsVk: (url: string) => Promise<any>;
 }
 
 export interface IFeedController {

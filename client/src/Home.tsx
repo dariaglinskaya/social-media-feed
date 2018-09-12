@@ -17,7 +17,8 @@ interface IProps {
   twitter?: any;
   vk?: any;
   isLoading: boolean;
-  cards: any;
+  inst_cards: any;
+  vk_cards: any;
 }
 class Home extends React.Component<IProps, any> {
   constructor(props) {
@@ -37,10 +38,11 @@ class Home extends React.Component<IProps, any> {
     
   }
   public renderCards() {
-    const cards = this.props.cards;
+    const cards = this.props.inst_cards;
+    console.log(this.props)
     return cards.map((card, index) => {
       return <CardItem key={index}
-        {...card.node} />
+        {...card} />
     });
   }
   public render() {
@@ -72,7 +74,8 @@ class Home extends React.Component<IProps, any> {
 }
 const mapStateToProps = state => {
   return {
-    cards: state.cards,
+    inst_cards: state.inst_cards,
+    vk_cards: state.vk_cards,
     isLoading: state.isLoading
   };
 };
