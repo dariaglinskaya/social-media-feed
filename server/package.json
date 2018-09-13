@@ -22,6 +22,7 @@
     "nodemon": "^1.18.4",
     "public-instagram": "https://github.com/ivolimasilva/public-instagram.git",
     "reflect-metadata": "^0.1.12",
+    "twitter": "^1.7.1",
     "typescript": "^3.0.3",
     "vkflow": "^1.0.0"
   },

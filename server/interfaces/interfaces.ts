@@ -10,8 +10,8 @@ export interface ICard {
 }
 
 export interface IFeedService {
-    getFeedsInstagram: (url: string) => Promise<ICard[]>;
-    getFeedsTwitter: (url: string) => Promise<ICard[]>;
+    getUserByIDInstagram: (url: string) => Promise<any>;
+    getFeedsTwitter: (url: string) => Promise<any>;
     getFeedsVk: (url: string) => Promise<any>;
 }
 

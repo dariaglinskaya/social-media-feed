@@ -19,6 +19,7 @@ interface IProps {
   isLoading: boolean;
   inst_cards: any;
   vk_cards: any;
+  tw_cards: any;
 }
 class Home extends React.Component<IProps, any> {
   constructor(props) {
@@ -38,8 +39,14 @@ class Home extends React.Component<IProps, any> {
     
   }
   public renderCards() {
-    const cards = this.props.inst_cards;
-    console.log(this.props)
+    let cards =[];
+    if( this.props.inst_cards.length !== 0) {
+      cards = this.props.inst_cards;
+    } else if (this.props.vk_cards.length !== 0) {
+      cards = this.props.vk_cards;
+    } else if (this.props.tw_cards.length !== 0) {
+      cards = this.props.tw_cards
+    }
     return cards.map((card, index) => {
       return <CardItem key={index}
         {...card} />
@@ -76,6 +83,7 @@ const mapStateToProps = state => {
   return {
     inst_cards: state.inst_cards,
     vk_cards: state.vk_cards,
+    tw_cards: state.tw_cards,
     isLoading: state.isLoading
   };
 };

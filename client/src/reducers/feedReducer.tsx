@@ -2,7 +2,8 @@ import { feedConstant } from '../constants/feedConstants';
 
 const INITIAL_STATE = {
     vk_cards: [],
-    inst_cards: [], 
+    inst_cards: [],
+    tw_cards: [], 
     isLoading: false
 }
 export function feed(state = INITIAL_STATE, action) {
@@ -19,6 +20,14 @@ export function feed(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 vk_cards: action.vk_cards,
+                isLoading: false,
+                fetchSuccess: true
+            }
+        }
+        case feedConstant.TWITTER_SUCCESS: {
+            return {
+                ...state,
+                tw_cards: action.tw_cards,
                 isLoading: false,
                 fetchSuccess: true
             }

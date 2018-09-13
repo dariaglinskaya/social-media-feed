@@ -24,15 +24,17 @@ class FeedController {
 
     @httpPost('/instagram')
     async instagram(@request() req, @response() res) {
-        await this._feedService.getFeedsInstagram(req.body[0]).then((result) => {
-            console.log(result);
-            res.json(result);
+        await req.body.forEach(async (item) => {
+            console.log(item)
+            await this._feedService.getUserByIDInstagram('311463581').then((result) => {
+                console.log(result);
+                res.json(result);
+            })
         });
-        
     }
     @httpPost('/twitter')
-    private twitter(@request() req, @response() res) {
-        this._feedService.getFeedsTwitter(req.body).then((cards) => {
+    async twitter(@request() req, @response() res) {
+        await this._feedService.getFeedsTwitter(req.body).then((cards) => {
             res.send(cards);
         }).catch((error) => {
             res.send(error);

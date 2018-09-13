@@ -1,9 +1,9 @@
 import { injectable } from 'inversify';
 import { IFeedService, ICard } from '../interfaces/interfaces';
-//import * as instagram from 'instagram-node';
+import * as instagram from 'instagram-node';
 //const instagram = require('public-instagram');
 const vkapi = new (require('node-vkapi'))({
-    accessToken: '9d5599f8134d2cc9a1a7264a236573b6f975e32803344ae888a3f408a9552e35a202c48d1d24f9349550f',           // <String> Ключ доступа
+    accessToken: '0ac4ea2d86e2193528abf4b0b51e384eaf37162a66edf3e2a992dca6a104f260e58fba1b05415a2029693',           // <String> Ключ доступа
     apiVersion: '5.68',         // <String> Версия API
     appId: '6690247',           // <Number> ID приложения ВКонтакте
     appSecret: 'eq7gM0Xy2Z0aSapGVtBr',           // <String> Секретный ключ приложения ВКонтакте
@@ -13,44 +13,48 @@ const vkapi = new (require('node-vkapi'))({
     userPassword: 'lkjhgfdsa',           // <String> Пароль пользователя
     baseDelay: 334             // <Number> Базовая задержка между вызовами API (334 составляет ~1/3 секунды и используется для авторизации через токен пользователя)
 });
+const Twitter = require('twitter');
+const client = new Twitter({
+    consumer_key: 'sLb6RJBZNCjMAXH9ZW0oZ2vAT',
+    consumer_secret: 'Z2S3sYJg5XS6hqy6cAxadK1YaH96py1fJamDsdUWXYQE7svLwa',
+    access_token_key: '505844624-AVNm132S99d3h5XgVDuymy5PAcUflPNPrj9E7BQW',
+    access_token_secret: 'XQkYolSEZ3mntNVsUfD9vzPk0N0GvyRVIieAb8GQ8Obnf'
+});
 
 @injectable()
 export class FeedService implements IFeedService {
 
-    async getFeedsInstagram(tag): Promise<any> {
-        //var ig = instagram.instagram();
-        //ig.use({ access_token: '311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f' });
-        /* const result = await instagram.tags.recent(tag, 10);
-         console.log(result)
-         return result;*/
-
-        /*return await new Promise((resolve, reject) => {
-            
-            console.log(result)
-            if (result) {
-                resolve(result);
-            } else {
-                reject();
-            }
-            ig.tag_media_recent(tag, { count: 50 }, (err, result) => {
+    async getUserByIDInstagram(id): Promise<any> {
+        var ig = instagram.instagram();
+        ig.use({ access_token: '311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f' });
+        return await new Promise((resolve, reject) => {
+            ig.user(id, (err, result) => {
                 if (!err) {
+                    console.log(result)
                     resolve(result);
                 } else {
                     console.log('service error');
                     reject(err.error_message);
                 }
             })
-        })*/
+        })
     }
-    getFeedsTwitter(url): Promise<ICard[]> {
-
-        return new Promise<ICard[]>((resolve, reject) => {
-
+    async getFeedsTwitter(tag): Promise<any> {
+        return await new Promise<ICard[]>((resolve, reject) => {
+            client.get('search/tweets', { q: '#' + tag.tag, count: 50 }, (error, tweets, response) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(tweets);
+                }
+                console.log();  // The favorites..
+            });
         });
     }
     async getFeedsVk(tag): Promise<any> {
+        console.log(tag.tag)
         return vkapi.call('newsfeed.search', {
-            q: tag[0],
+            q: tag.tag,
         })
     }
 }
