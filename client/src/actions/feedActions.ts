@@ -86,9 +86,9 @@ function renderInstagramPost(tag) {
                         text = item.node.edge_media_to_caption.edges[0].node.text;
                     }
                     axios.get(`https://api.instagram.com/v1/users/${item.node.owner.id}?access_token=311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f`)
-                    .then((response) => {
-                        console.log(response)
-                    })
+                        .then((response) => {
+                            console.log(response)
+                        })
                     result.push({
                         username: item.node.owner.id,
                         profile_picture: item.node.owner.id,
@@ -100,7 +100,7 @@ function renderInstagramPost(tag) {
                     ids.push(item.node.owner.id);
                 });
                 //dispatch(getInstagramUsers(ids));
-                
+
             })
 
     };
@@ -127,7 +127,7 @@ function getInstagramUsers(ids) {
     };
 }*/
 function renderVKPost(tag) {
-    const res = {tag: tag};
+    const res = { tag: tag };
     return (dispatch) => {
         dispatch(cardsIsLoading());
         axios({
@@ -140,19 +140,20 @@ function renderVKPost(tag) {
             },
             data: res
         })
-            .then((response) => {
+            .then(async (response) => {
                 let result: any[] = [];
+                let ids: any[] = [];
                 console.log(response)
-                response.data.forEach((item) => {
-                    console.log(item)
-                    let image = '';                    
-                    if (item.attachments !== undefined && item.attachments[0].photo ) {
-                        if(item.attachments[0].photo.photo_1280 !== undefined) {
+                response.data.forEach(async (item) => {
+                    let image = '';
+
+                    if (item.attachments !== undefined && item.attachments[0].photo) {
+                        if (item.attachments[0].photo.photo_1280 !== undefined) {
                             image = item.attachments[0].photo.photo_1280;
                         } else if (item.attachments[0].photo.photo_604 !== undefined) {
                             image = item.attachments[0].photo.photo_604;
-                        }                       
-                    } 
+                        }
+                    }
                     let res = {
                         username: item.owner_id,
                         profile_picture: item.owner_id,
@@ -161,15 +162,48 @@ function renderVKPost(tag) {
                         text: item.text,
                         comments: item.comments.count
                     };
+                    if (item.owner_id < 0) {
+                        ids.push(item.owner_id * (-1))
+                    } else {
+                        ids.push(item.owner_id)
+                    }
                     result.push(res);
                 });
-                dispatch(renderVKCardsSuccess(result));
+                await getVKUsers(ids).then((users) => {
+                    console.log(users)
+                    result.forEach((item) => {
+                        users.forEach((user: any) => {
+                            item.username = user.first_name + ' ' + user.last_name,
+                                item.profile_picture = user.photo_50;
+                        })
+                    });
+                });
+                console.log(result)
+                dispatch(renderVKCardsSuccess(result))
             })
             .catch(() => dispatch(renderCardsFailure()));
     };
 }
+async function getVKUsers(ids) {
+    let users = [];
+    await axios({
+        method: 'post',
+        url: '/feed/vk/users',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Access-Control-Allow-Methods': 'DELETE, HEAD, GET, OPTIONS, POST, PUT'
+        },
+        data: ids
+    })
+        .then((response) => {
+            users = response.data;
+        })
+        .catch(() => new Error());
+    return await users;
+}
 function renderTwitterPost(tag) {
-    const res = {tag: tag};
+    const res = { tag: tag };
     return (dispatch) => {
         dispatch(cardsIsLoading());
         axios({
@@ -187,12 +221,12 @@ function renderTwitterPost(tag) {
                 console.log(response)
                 response.data.statuses.forEach((item) => {
                     let image = '';
-                    if(item.entities.media !== undefined) {
+                    if (item.entities.media !== undefined) {
                         console.log(item)
                         console.log(item.entities.media[0].media_url)
                         image = item.entities.media[0].media_url;
-                    }         
-                    console.log(image)           
+                    }
+                    console.log(image)
                     let res = {
                         username: item.user.screen_name,
                         profile_picture: item.user.profile_image_url,

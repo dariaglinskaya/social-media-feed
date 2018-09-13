@@ -13,6 +13,7 @@ export interface IFeedService {
     getUserByIDInstagram: (url: string) => Promise<any>;
     getFeedsTwitter: (url: string) => Promise<any>;
     getFeedsVk: (url: string) => Promise<any>;
+    getUsersVk: (ids: string[]) => Promise<any>;
 }
 
 export interface IFeedController {

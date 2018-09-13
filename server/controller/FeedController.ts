@@ -27,7 +27,6 @@ class FeedController {
         await req.body.forEach(async (item) => {
             console.log(item)
             await this._feedService.getUserByIDInstagram('311463581').then((result) => {
-                console.log(result);
                 res.json(result);
             })
         });
@@ -44,8 +43,18 @@ class FeedController {
     async vk(@request() req, @response() res) {
         console.log(req.body)
         await this._feedService.getFeedsVk(req.body).then((cards) => {
-            console.log(cards);
             res.send(cards.items);
+        }).catch((error) => {
+            console.log('error!!!!')
+            res.send(error);
+        })
+    }
+    @httpPost('/vk/users')
+    async vk_users(@request() req, @response() res) {
+        console.log(req.body)
+        await this._feedService.getUsersVk(req.body).then((users) => {
+            console.log(users);
+            res.send(users);
         }).catch((error) => {
             console.log('error!!!!')
             res.send(error);

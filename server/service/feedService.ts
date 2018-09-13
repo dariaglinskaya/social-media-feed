@@ -52,9 +52,14 @@ export class FeedService implements IFeedService {
         });
     }
     async getFeedsVk(tag): Promise<any> {
-        console.log(tag.tag)
-        return vkapi.call('newsfeed.search', {
+        return await vkapi.call('newsfeed.search', {
             q: tag.tag,
+        })
+    }
+    async getUsersVk(ids): Promise<any> {
+        return await vkapi.call('users.get', {
+            user_ids: ids.join(),
+            fields: 'photo_50'
         })
     }
 }
