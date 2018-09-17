@@ -19,7 +19,7 @@ export class CardItem extends React.Component<IProps, IState> {
     constructor(props) {
         super(props);
     }
-    public render() {
+    public render(): any {
         return (
             <Card
                 cover={this.props.image ? <img alt="example" src={this.props.image}/> : ""}
