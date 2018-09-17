@@ -12,7 +12,10 @@ export interface IProps {
     profile_picture: any;
     username: string;
 }
-export class CardItem extends React.Component<IProps, {}> {
+export interface IState {
+
+}
+export class CardItem extends React.Component<IProps, IState> {
     public render() {
         return (
             <Card
