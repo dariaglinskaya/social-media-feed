@@ -16,6 +16,9 @@ export interface IState {
 
 }
 export class CardItem extends React.Component<IProps, IState> {
+    constructor(props) {
+        super(props);
+    }
     public render() {
         return (
             <Card
