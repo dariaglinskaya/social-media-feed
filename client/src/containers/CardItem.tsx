@@ -1,7 +1,7 @@
 import { Card, Icon, Avatar } from 'antd';
 import * as React from 'react';
 
-const { Meta } = Card;
+const { Meta }: any = Card;
 export interface IProps {
     text: any;
     display_url: any;
