@@ -28,9 +28,7 @@ class Search extends React.Component<IProps, IState>{
         
         this.setState({ value: value });
         const tag = value[0].substring(0, 2);
-        console.log(tag)
         if ( tag === 'vk') {
-            console.log(value[0].substring(2))
             this.props.fetchDataVK(value[0].substring(2));
         } else if(tag === 'in') {
             this.props.fetchDataInst(value[0].substring(2));

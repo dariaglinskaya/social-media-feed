@@ -1,17 +1,16 @@
 import { injectable } from 'inversify';
 import { IFeedService, ICard } from '../interfaces/interfaces';
 import * as instagram from 'instagram-node';
-//const instagram = require('public-instagram');
 const vkapi = new (require('node-vkapi'))({
-    accessToken: '0ac4ea2d86e2193528abf4b0b51e384eaf37162a66edf3e2a992dca6a104f260e58fba1b05415a2029693',           // <String> Ключ доступа
-    apiVersion: '5.68',         // <String> Версия API
-    appId: '6690247',           // <Number> ID приложения ВКонтакте
-    appSecret: 'eq7gM0Xy2Z0aSapGVtBr',           // <String> Секретный ключ приложения ВКонтакте
-    captchaApiKey: null,           // <String> API ключ сервиса по распознаванию капчи
-    captchaService: 'anti-captcha', // <String> Сервис по распознаванию капчи (anti-captcha, antigate, rucaptcha)
-    userLogin: '+375336972675',           // <String> Логин пользователя
-    userPassword: 'lkjhgfdsa',           // <String> Пароль пользователя
-    baseDelay: 334             // <Number> Базовая задержка между вызовами API (334 составляет ~1/3 секунды и используется для авторизации через токен пользователя)
+    accessToken: '0ac4ea2d86e2193528abf4b0b51e384eaf37162a66edf3e2a992dca6a104f260e58fba1b05415a2029693',
+    apiVersion: '5.68',
+    appId: '6690247',
+    appSecret: 'eq7gM0Xy2Z0aSapGVtBr',
+    captchaApiKey: null,
+    captchaService: 'anti-captcha',
+    userLogin: '+375336972675',
+    userPassword: 'lkjhgfdsa',
+    baseDelay: 334
 });
 const Twitter = require('twitter');
 const client = new Twitter({
@@ -30,10 +29,8 @@ export class FeedService implements IFeedService {
         return await new Promise((resolve, reject) => {
             ig.user(id, (err, result) => {
                 if (!err) {
-                    console.log(result)
                     resolve(result);
                 } else {
-                    console.log('service error');
                     reject(err.error_message);
                 }
             })
@@ -47,7 +44,6 @@ export class FeedService implements IFeedService {
                 } else {
                     resolve(tweets);
                 }
-                console.log();  // The favorites..
             });
         });
     }

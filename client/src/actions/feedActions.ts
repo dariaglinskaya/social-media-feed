@@ -85,13 +85,13 @@ function renderInstagramPost(tag) {
                     if (item.node.edge_media_to_caption.edges[0] !== undefined) {
                         text = item.node.edge_media_to_caption.edges[0].node.text;
                     }
-                    axios.get(`https://api.instagram.com/v1/users/${item.node.owner.id}?access_token=311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f`)
+                   /* axios.get(`https://api.instagram.com/v1/users/${item.node.owner.id}?access_token=311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f`)
                         .then((response) => {
                             console.log(response)
-                        })
+                        })*/
                     result.push({
-                        username: item.node.owner.id,
-                        profile_picture: item.node.owner.id,
+                        username: '#'+item.node.owner.id,
+                        profile_picture: 'https://www.limestone.edu/sites/default/files/user.png',
                         image: item.node.display_url,
                         likes: item.node.edge_liked_by.count,
                         text: text,
@@ -99,7 +99,10 @@ function renderInstagramPost(tag) {
                     });
                     ids.push(item.node.owner.id);
                 });
-                //dispatch(getInstagramUsers(ids));
+                result.forEach((item) => {
+                    
+                });
+                dispatch(renderInstagramCardsSuccess(result));
 
             })
 
