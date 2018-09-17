@@ -19,7 +19,6 @@ export class CardItem extends React.Component<IProps, IState> {
     public render() {
         return (
             <Card
-                style={{ "width": "80%" }}
                 cover={this.props.image ? <img alt="example" src={this.props.image}/> : ""}
                 actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
                 className="card-item"
