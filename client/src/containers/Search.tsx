@@ -52,7 +52,7 @@ class Search extends React.Component<IProps, IState>{
                 <Select
                     mode="tags"
                     style={{ width: '100%' }}
-                    placeholder="Search by tag"
+                    placeholder="Search by tag. #vktag #twtag #intag"
                     onChange={this.handleChange.bind(this)}
                 />
             </div>
