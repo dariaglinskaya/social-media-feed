@@ -32,7 +32,6 @@ export class CardItem extends React.Component<IProps & ICardProps, IState> {
         super(props);
     }
     public render() {
-        console.log(this.props)
         return (
             <div>
                 <Card                    
