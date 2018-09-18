@@ -11,12 +11,14 @@ export interface IProps {
     comments: any;
     profile_picture: any;
     username: string;
+    cover: any;
+    actions: any;
 }
 export interface IState {
 
 }
 export class CardItem extends React.Component<IProps, IState> {
-    constructor(props) {
+    public constructor(props) {
         super(props);
     }
     public render(): any {
