@@ -11,7 +11,7 @@ export interface IProps {
     comments: any;
     profile_picture: any;
     username: string;
-    cover: any;
+    card: any;
     actions: any;
 }
 export interface ICardProps extends React.Props<any> {
@@ -32,13 +32,13 @@ export class CardItem extends React.Component<IProps & ICardProps, IState> {
         super(props);
     }
     public render() {
-        console.log('render item')
+        console.log(this.props)
         return (
             <div>
-                <Card
-                    cover={this.props.image ? <img alt="example" src={this.props.image} /> : ""}
+                <Card                    
                     actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
                     className="card-item"
+                    cover={this.props.image ? <img alt="example" src={this.props.image} /> : ""}
                 >
                     <Meta
                         avatar={<Avatar src={this.props.profile_picture} />}
@@ -47,7 +47,6 @@ export class CardItem extends React.Component<IProps & ICardProps, IState> {
                     />
                 </Card>
             </div>
-
-        )
+        );
     }
 }
