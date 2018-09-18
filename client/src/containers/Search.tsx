@@ -18,6 +18,7 @@ interface IState {
     value: string;
 }
 class Search extends React.Component<IProps, IState>{
+    public state: any;
     public constructor(props: IProps) {
         super(props);
         this.state = {
