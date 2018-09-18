@@ -15,9 +15,7 @@ export interface IAppProps extends IStateProps, IActionProps { }
 export default class App extends React.Component<IAppProps, {}> {
   public render() {
     return (
-      <div className="App">
         <Home />
-      </div>
     );
   }
 }
