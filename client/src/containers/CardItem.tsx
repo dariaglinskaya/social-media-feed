@@ -1,4 +1,5 @@
-import { Card, Icon, Avatar } from 'antd';
+import { Card  } from 'antd';
+import { Icon, Avatar } from 'antd';
 import * as React from 'react';
 
 const { Meta }: any = Card as any;
@@ -25,7 +26,7 @@ export class CardItem extends React.Component<IProps, IState> {
         return (
             <div>
                 <Card
-                    cover={() => { this.props.image ? <img alt="example" src={this.props.image} /> : "" }}
+                    cover={this.props.image ? <img alt="example" src={this.props.image} /> : "" }
                     actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
                     className="card-item"
                 >
