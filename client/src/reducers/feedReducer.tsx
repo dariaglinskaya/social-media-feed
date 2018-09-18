@@ -12,6 +12,8 @@ export function feed(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 inst_cards: action.inst_cards,
+                vk_cards: [],
+                tw_cards: [],
                 isLoading: false,
                 fetchSuccess: true
             }
@@ -20,6 +22,8 @@ export function feed(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 vk_cards: action.vk_cards,
+                inst_cards: [],
+                tw_cards: [],
                 isLoading: false,
                 fetchSuccess: true
             }
@@ -27,6 +31,8 @@ export function feed(state = INITIAL_STATE, action) {
         case feedConstant.TWITTER_SUCCESS: {
             return {
                 ...state,
+                vk_cards: [],
+                inst_cards: [],
                 tw_cards: action.tw_cards,
                 isLoading: false,
                 fetchSuccess: true
