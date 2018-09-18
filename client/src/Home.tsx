@@ -23,6 +23,7 @@ interface IProps {
   props: any;
 }
 class Home extends React.Component<IProps, any> {
+  public props: any;
   constructor(props) {
     super(props);
   }
