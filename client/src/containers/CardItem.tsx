@@ -14,10 +14,14 @@ export interface IProps {
     cover: any;
     actions: any;
 }
+export interface ICardProps extends React.Props<any> {
+    cover: any;
+    actions: any;
+}
 export interface IState {
 
 }
-export class CardItem extends React.Component<IProps, IState> {
+export class CardItem extends React.Component<IProps & ICardProps, IState> {
     public constructor(props: any) {
         super(props);
     }
