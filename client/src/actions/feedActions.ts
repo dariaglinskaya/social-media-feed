@@ -265,19 +265,25 @@ function renderCardsFailure() {
 function renderInstagramCardsSuccess(cards) {
     return {
         type: feedConstant.INSTAGRAM_SUCCESS,
-        inst_cards: cards
+        inst_cards: cards,
+        vk_cards: [],
+        tw_cards: []
     }
 }
 function renderTwitterCardsSuccess(cards) {
     return {
         type: feedConstant.TWITTER_SUCCESS,
-        tw_cards: cards
+        tw_cards: cards,
+        inst_cards: [],
+        vk_cards: []
     }
 }
 function renderVKCardsSuccess(cards) {
     return {
         type: feedConstant.VK_SUCCESS,
-        vk_cards: cards
+        vk_cards: cards,
+        inst_cards: [],
+        tw_cards: []
     }
 }
 function instagramSuccess(cards) {
