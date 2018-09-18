@@ -19,14 +19,14 @@ interface IState {
 }
 class Search extends React.Component<IProps, IState>{
     public state: any;
+    public setState: any;
     public constructor(props: IProps) {
         super(props);
         this.state = {
             value: ''
         }
     }
-    public handleChange(value: any) {
-        
+    public handleChange(value: any) {        
         this.setState({ value: value });
         const tag = value[0].substring(0, 2);
         if ( tag === 'vk') {
