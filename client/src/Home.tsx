@@ -20,6 +20,7 @@ interface IProps {
   inst_cards: any;
   vk_cards: any;
   tw_cards: any;
+  props: any;
 }
 class Home extends React.Component<IProps, any> {
   constructor(props) {
