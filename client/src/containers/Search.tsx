@@ -27,15 +27,22 @@ class Search extends React.Component<IProps, IState>{
             value: ''
         }
     }
-    public handleChange(value: any) {        
+    public handleChange(value: any) {
         this.setState({ value: value });
-        const tag = value[0].substring(0, 2);
-        if ( tag === 'vk') {
-            this.props.fetchDataVK(value[0].substring(2));
-        } else if(tag === 'in') {
-            this.props.fetchDataInst(value[0].substring(2));
-        } else if(tag === 'tw') {
-            this.props.fetchDataTwitter(value[0].substring(2));
+        if (value.length === 0) {
+            return <div>Instagram: #intag
+                Twitter: #twtag
+                VK: #vktag
+            </div>
+        } else {
+            const tag = value[0].substring(0, 2);
+            if (tag === 'vk') {
+                this.props.fetchDataVK(value[0].substring(2));
+            } else if (tag === 'in') {
+                this.props.fetchDataInst(value[0].substring(2));
+            } else if (tag === 'tw') {
+                this.props.fetchDataTwitter(value[0].substring(2));
+            }
         }
     }
     public render() {
