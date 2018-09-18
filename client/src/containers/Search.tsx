@@ -20,6 +20,7 @@ interface IState {
 class Search extends React.Component<IProps, IState>{
     public state: any;
     public setState: any;
+    public props: any;
     public constructor(props: IProps) {
         super(props);
         this.state = {
