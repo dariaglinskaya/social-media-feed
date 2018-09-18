@@ -76,10 +76,7 @@ class Home extends React.Component<IProps, any> {
             </Row>
           </Header>
           <Row>
-            <Col span={14} offset={5}>
-              <Button href="https://api.instagram.com/oauth/authorize/?client_id=bb70807d70154d83ada0d4ddc8492fdb&amp;redirect_uri=http://localhost:3000/&amp;response_type=token&amp;scope=public_content" ><Icon type="instagram" theme="outlined" /></Button>
-              <Button href='https://api.twitter.com/oauth/authenticate?oauth_token=Z6eEdO8MOmk394WozF5oKyuAv855l4Mlqo7hhlSLik'><Icon type="twitter" theme="outlined" /></Button>
-              <Button onClick={this.vk}><Icon type="bold" theme="outlined" /></Button>
+            <Col span={14} offset={5}>              
               <Content className="content">
                 {this.props.isLoading ? <Spin /> : this.renderCards()}
               </Content>
