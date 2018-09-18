@@ -39,6 +39,7 @@ class Home extends React.Component<IProps, any> {
     
   }
   public renderCards() {
+    console.log('render cards')
     let cards =[];
     if( this.props.inst_cards.length !== 0) {
       cards = this.props.inst_cards;
