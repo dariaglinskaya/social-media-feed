@@ -35,9 +35,6 @@ class Home extends React.Component<IProps, any> {
   public vk() {
     this.props.vk();
   }
-  public componentDidMount() {
-    
-  }
   public renderCards() {
     console.log('render cards')
     let cards =[];
