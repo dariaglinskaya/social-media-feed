@@ -1,11 +1,11 @@
-import { Col, Layout, Row, Select, Button, Icon, Spin } from 'antd';
+import { Col, Layout, Row, Select, Button, Icon, Spin, Card, Avatar } from 'antd';
 import * as React from 'react';
 import './App.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { CardItem } from './containers/CardItem';
 import Search from './containers/Search';
 import feedActions from './actions/feedActions';
+const { Meta } = Card;
 const Option = Select.Option;
 const { Header, Footer, Content } = Layout;
 const children: any = [];
@@ -49,8 +49,19 @@ class Home extends React.Component<IProps, any> {
       cards = this.props.tw_cards
     }
     return cards.map((card, index): any => {
-      return <CardItem key={index}
-        {...card} />
+      return <Card actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
+                    className="card-item"
+                    cover={card.image ? <img alt="example" src={card.image} /> : ""}
+                    key={index}
+                >
+                    <Meta
+                        avatar={<Avatar src={card.profile_picture} />}
+                        title={<span>{card.username}</span>}
+                        description={card.text}
+                    />
+                </Card>
+      /*return <CardItem 
+        {...card} />*/
     });
   }
   public render() {
