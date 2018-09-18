@@ -14,7 +14,7 @@ export interface IProps {
     card: any;
     actions: any;
 }
-export interface ICardProps extends React.Props<any> {
+export interface ICardProps {
     cover: any;
     actions: any;
 }
@@ -34,8 +34,7 @@ export class CardItem extends React.Component<IProps & ICardProps, IState> {
     public render() {
         return (
             <div>
-                <Card                    
-                    actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
+                <Card actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
                     className="card-item"
                     cover={this.props.image ? <img alt="example" src={this.props.image} /> : ""}
                 >
