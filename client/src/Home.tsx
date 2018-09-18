@@ -1,4 +1,6 @@
-import { Col, Layout, Row, Button, Icon, Spin, Card, Avatar } from 'antd';
+import { Col, Layout, Row, Button, Icon, Spin, Avatar } from 'antd';
+import { Card as _Card } from 'antd';
+const Card = _Card as any;
 import * as React from 'react';
 import './App.css';
 import { bindActionCreators } from 'redux';
