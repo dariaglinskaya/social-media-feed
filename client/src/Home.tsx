@@ -1,4 +1,4 @@
-import { Layout, Row, Button, Icon, Spin, Avatar } from 'antd';
+import { Layout, Row, Icon, Spin, Avatar } from 'antd';
 import { Card as _Card } from 'antd';
 const Card = _Card as any;
 import * as React from 'react';
