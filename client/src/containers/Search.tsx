@@ -29,6 +29,7 @@ class Search extends React.Component<IProps, IState>{
     }
     public handleChange(value: any) {
         this.setState({ value: value });
+        console.log(value)
         if (value.length === 0) {
             return <div>Instagram: #intag
                 Twitter: #twtag
