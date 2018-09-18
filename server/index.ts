@@ -1,9 +1,10 @@
 import * as bodyParser from 'body-parser';
 import "reflect-metadata";
 import { myContainer } from './container/inversify.config';
-
+import * as express from 'express';
 import { interfaces, InversifyExpressServer, TYPE } from 'inversify-express-utils';
 import  * as cors from 'cors';
+import * as path from 'path';
 
 import "./controller/FeedController";
 
@@ -15,7 +16,7 @@ server.setConfig((app) => {
     extended: true
   }));
   app.use(bodyParser.json());
-  
+  app.use(express.static(path.join(__dirname, '../client/build')));
   app.use(cors())
 });
 
