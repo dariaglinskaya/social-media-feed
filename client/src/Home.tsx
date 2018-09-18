@@ -47,7 +47,7 @@ class Home extends React.Component<IProps, any> {
     } else if (this.props.tw_cards.length !== 0) {
       cards = this.props.tw_cards
     }
-    return cards.map((card, index) => {
+    return cards.map((card, index): any => {
       return <CardItem key={index}
         {...card} />
     });

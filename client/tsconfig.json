@@ -9,7 +9,7 @@
    ],
     "baseUrl": ".",
     "outDir": "build/dist",
-    "module": "esnext",
+    "module": "es2015",
     "target": "es5",
     "lib": [
       "es6",
