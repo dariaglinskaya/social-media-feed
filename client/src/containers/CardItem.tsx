@@ -1,8 +1,7 @@
-import { Card  } from 'antd';
+import { Card } from 'antd';
 import { Icon, Avatar } from 'antd';
 import * as React from 'react';
-
-const { Meta }: any = Card as any;
+const { Meta } = Card;
 export interface IProps {
     text: any;
     display_url: any;
@@ -22,7 +21,7 @@ export class CardItem extends React.Component<IProps, IState> {
     public constructor(props) {
         super(props);
     }
-    public render(): any {
+    public render() {
         return (
             <div>
                 <Card
