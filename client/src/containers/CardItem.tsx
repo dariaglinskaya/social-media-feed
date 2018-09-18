@@ -22,6 +22,12 @@ export interface IState {
 
 }
 export class CardItem extends React.Component<IProps & ICardProps, IState> {
+    static Card: typeof Card;
+    static Meta: typeof Meta;
+    static propTypes: {
+        cover: any;
+        actions: any;
+    };
     public constructor(props: any) {
         super(props);
     }
@@ -30,7 +36,7 @@ export class CardItem extends React.Component<IProps & ICardProps, IState> {
         return (
             <div>
                 <Card
-                    cover={this.props.image ? <img alt="example" src={this.props.image} /> : "" }
+                    cover={this.props.image ? <img alt="example" src={this.props.image} /> : ""}
                     actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
                     className="card-item"
                 >
