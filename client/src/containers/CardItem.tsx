@@ -27,13 +27,16 @@ export class CardItem extends React.Component<IProps, IState> {
         }
     }
     componentDidMount() {
-        if(this.props.text.length > 150) {
-            this.setState({shorten: true})
+        if (this.props.text.length > 150) {
+            this.setState({ shorten: true })
         }
     }
     public loadMore(e) {
-        this.setState({shorten: false})
-      }
+        this.setState({ shorten: false })
+    }
+    public loadLess(e) {
+        this.setState({ shorten: true })
+    }
     public render() {
         console.log(this.state)
         return (
@@ -46,7 +49,7 @@ export class CardItem extends React.Component<IProps, IState> {
                 <Meta
                     avatar={<Avatar src={this.props.profile_picture} />}
                     title={<span>{this.props.username}</span>}
-                    description={this.state.shorten ? [this.props.shorten_text, <a onClick={this.loadMore.bind(this)}>... Load more</a>] : this.props.text}
+                    description={this.state.shorten ? [this.props.shorten_text, <a onClick={this.loadMore.bind(this)}>... Load more</a>] : [this.props.text, <a onClick={this.loadLess.bind(this)}>... Load less</a>]}
                 />
             </Card>
         )
