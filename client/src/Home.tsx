@@ -1,15 +1,11 @@
-import { Layout, Row, Icon, Spin, Avatar } from 'antd';
-import { Card as _Card } from 'antd';
-const Card = _Card as any;
+import { Layout, Row, Spin, } from 'antd';
 import * as React from 'react';
 import { Col as _Col } from 'antd';
 const Col = _Col as any;
 import './App.css';
-import { bindActionCreators } from 'redux';
+import { CardItem } from './containers/CardItem';
 import { connect } from 'react-redux';
 import Search from './containers/Search';
-import feedActions from './actions/feedActions';
-const { Meta } = Card;
 const { Header, Footer, Content } = Layout;
 
 interface IProps {
@@ -27,15 +23,8 @@ class Home extends React.Component<IProps, any> {
   constructor(props) {
     super(props);
   }
-  public instagram(e) {
-    this.props.instagram();
-    e.preventDefault();
-  }
-  public twitter() {
-    this.props.twitter();
-  }
-  public vk() {
-    this.props.vk();
+  public loadMore(e) {
+    console.log(e.target)
   }
   public renderCards() {
     console.log('render cards')
@@ -48,20 +37,8 @@ class Home extends React.Component<IProps, any> {
       cards = this.props.tw_cards
     }
     return cards.map((card, index): any => {
-      return <Card
-        cover={card.image ? <img alt="example" src={card.image} /> : ""}
-        actions={[<Icon type="heart" key={1} />, <Icon type="message" key={2} />, <Icon type="ellipsis" key={3} />]}
-        className="card-item"
-        key={index}
-      >
-        <Meta
-          avatar={<Avatar src={card.profile_picture} />}
-          title={<span>{card.username}</span>}
-          description={card.text}
-        />
-      </Card> 
-      /*return <CardItem 
-        {...card} />*/
+      return <CardItem key={index}
+      {...card} />
     });
   }
   public render() {
@@ -76,7 +53,7 @@ class Home extends React.Component<IProps, any> {
             </Row>
           </Header>
           <Row>
-            <Col span={14} offset={5}>              
+            <Col span={14} offset={5}>
               <Content className="content">
                 {this.props.isLoading ? <Spin /> : this.renderCards()}
               </Content>
@@ -96,12 +73,5 @@ const mapStateToProps = state => {
     isLoading: state.isLoading
   };
 };
-const mapDispatchToProps = dispatch => {
-  const instagram = (code) => feedActions.instagram(code);
-  const twitter = () => feedActions.twitter();
-  const vk = () => feedActions.vk();
-  return {
-    ...bindActionCreators({ instagram, twitter, vk }, dispatch)
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+export default connect(mapStateToProps)(Home);

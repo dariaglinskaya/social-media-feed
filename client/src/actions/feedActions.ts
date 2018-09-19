@@ -6,70 +6,9 @@ const feedActions = {
     renderInstagramCardsSuccess,
     renderInstagramPost,
     renderTwitterPost,
-    renderVKPost,
-    instagram,
-    twitter,
-    vk
+    renderVKPost
 }
-function instagram(code) {
-    const code2 = { code: code }
-    console.log(code)
-    return (dispatch) => {
-        dispatch(instagramIsLoading());
-        axios({
-            method: 'post',
-            url: '/feed/auth_instagram',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET'
-            },
-            data: code2,
-        })
-            .then((response) => {
-                console.log(response)
-                dispatch(instagramSuccess(response.data));
-            })
-            .catch(() => dispatch(renderCardsFailure()));
-    };
-}
-function twitter() {
-    return (dispatch) => {
-        dispatch(cardsIsLoading());
-        axios({
-            method: 'get',
-            url: '/twitter',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Access-Control-Allow-Methods': 'DELETE, HEAD, GET, OPTIONS, POST, PUT'
-            }
-        })
-            .then((response) => {
-                console.log(response)
-                dispatch(instagramSuccess(response.data));
-            })
-            .catch(() => dispatch(renderCardsFailure()));
-    };
-}
-function vk() {
-    return (dispatch) => {
-        dispatch(cardsIsLoading());
-        axios({
-            method: 'post',
-            url: '/vk',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Access-Control-Allow-Methods': 'DELETE, HEAD, GET, OPTIONS, POST, PUT'
-            }
-        })
-            .then((response) => {
-                console.log(response)
-                dispatch(instagramSuccess(response.data));
-            })
-            .catch(() => dispatch(renderCardsFailure()));
-    };
-}
+
 function renderInstagramPost(tag) {
     return (dispatch) => {
         dispatch(cardsIsLoading());
@@ -95,6 +34,7 @@ function renderInstagramPost(tag) {
                         image: item.node.display_url,
                         likes: item.node.edge_liked_by.count,
                         text: text,
+                        shorten_text: text.length > 150 ? text.substring(0,150) : text,
                         comments: item.node.edge_media_to_comment.count
                     });
                     ids.push(item.node.owner.id);
@@ -107,28 +47,7 @@ function renderInstagramPost(tag) {
             })
 
     };
-}/*
-function getInstagramUsers(ids) {
-    console.log(ids)
-    return (dispatch) => {
-        dispatch(cardsIsLoading());
-        axios({
-            method: 'post',
-            url: '/feed/instagram',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Access-Control-Allow-Methods': 'DELETE, HEAD, GET, OPTIONS, POST, PUT'
-            },
-            data: ids
-        })
-            .then((response) => {
-                console.log(response)                
-                //dispatch(dispatch(renderInstagramCardsSuccess(response.data)));
-            })
-            .catch(() => dispatch(renderCardsFailure()));
-    };
-}*/
+}
 function renderVKPost(tag) {
     const res = { tag: tag };
     return (dispatch) => {
@@ -163,6 +82,7 @@ function renderVKPost(tag) {
                         image: image,
                         likes: item.likes.count,
                         text: item.text,
+                        shorten_text: item.text.length > 150 ? item.text.substring(0,150) : item.text,
                         comments: item.comments.count
                     };
                     if (item.owner_id < 0) {
@@ -235,6 +155,7 @@ function renderTwitterPost(tag) {
                         profile_picture: item.user.profile_image_url,
                         image: image,
                         text: item.text,
+                        shorten_text: item.text.length > 150 ? item.text.substring(0,150) : item.text,
                         comments: item.retweet_count
                     };
                     result.push(res);
@@ -247,12 +168,6 @@ function renderTwitterPost(tag) {
 function cardsIsLoading() {
     return {
         type: feedConstant.CARDS_IS_LOADING,
-        isLoading: true
-    };
-}
-function instagramIsLoading() {
-    return {
-        type: feedConstant.INSTAGRAM_IS_LOADING,
         isLoading: true
     };
 }
@@ -284,11 +199,6 @@ function renderVKCardsSuccess(cards) {
         vk_cards: cards,
         inst_cards: [],
         tw_cards: []
-    }
-}
-function instagramSuccess(cards) {
-    return {
-        type: feedConstant.INSTAGRAM_SUCCESS,
     }
 }
 export default feedActions;
