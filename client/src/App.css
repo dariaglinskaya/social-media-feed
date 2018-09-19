@@ -50,7 +50,13 @@
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
+  .ant-col-offset-5 {
+    margin-left: 2.5%;
+  }
+  .ant-col-14 {
+    width: 95%;
+  }
   .card-item {
-      width: 95%;
+    width: 95%;
   }
 }
