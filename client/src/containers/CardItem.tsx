@@ -19,6 +19,7 @@ interface IState {
 export class CardItem extends React.Component<IProps, IState> {
     public state: any;
     public props: any;
+    public setState: any;
     constructor(props) {
         super(props);
         this.state = {
