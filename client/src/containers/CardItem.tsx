@@ -17,6 +17,8 @@ interface IState {
     shorten: boolean;
 }
 export class CardItem extends React.Component<IProps, IState> {
+    public state: any;
+    public props: any;
     constructor(props) {
         super(props);
         this.state = {
