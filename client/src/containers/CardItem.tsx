@@ -16,6 +16,12 @@ interface IProps {
 interface IState {
     shorten: boolean;
 }
+const IconText = ({ type, text }) => (
+    <span>
+        <Icon type={type} style={{ marginRight: 8 }} />
+        {text}
+    </span>
+);
 export class CardItem extends React.Component<IProps, IState> {
     public state: any;
     public props: any;
@@ -42,7 +48,7 @@ export class CardItem extends React.Component<IProps, IState> {
         return (
             <Card
                 cover={this.props.image ? <img alt="example" src={this.props.image} /> : ""}
-                actions={[<Icon type="heart" key={1} />, this.props.likes, <Icon type="message" key={2} />, this.props.comments]}
+                actions={[<IconText type="heart" key={1} text={this.props.likes} />, <IconText type="message" key={2} text={this.props.comments} />]}
                 className="card-item"
             >
                 <Meta
