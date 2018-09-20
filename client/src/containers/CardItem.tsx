@@ -16,7 +16,7 @@ interface IProps {
 interface IState {
     shorten: boolean;
 }
-const IconText = ({ type, text }) => (
+const IconText = ({ type, text, key }) => (
     <span>
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
