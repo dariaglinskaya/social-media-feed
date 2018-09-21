@@ -67,7 +67,7 @@ class Home extends React.Component<IProps, IState> {
               </Content>
             </Col>
           </Row>
-          <Footer className="footer">Footer</Footer>
+          <Footer className="footer">Last update {new Date().toLocaleDateString()}</Footer>
         </Layout>
       </div>
     );
