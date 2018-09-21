@@ -1,14 +1,22 @@
 import { feedConstant } from '../constants/feedConstants'
 import axios from 'axios';
 
+const INITIAL_COUNT = 5;
+
 const feedActions = {
     renderCardsFailure,
     renderInstagramCardsSuccess,
     renderInstagramPost,
     renderTwitterPost,
-    renderVKPost
+    renderVKPost,
+    loadMore
 }
-
+function loadMore() {
+    return {
+        type: feedConstant.LOAD_MORE,
+        isLoading: true
+    }
+}
 function renderInstagramPost(tag) {
     return (dispatch) => {
         dispatch(cardsIsLoading());
@@ -182,7 +190,8 @@ function renderInstagramCardsSuccess(cards) {
         type: feedConstant.INSTAGRAM_SUCCESS,
         inst_cards: cards,
         vk_cards: [],
-        tw_cards: []
+        tw_cards: [],
+        actual_cards: cards.slice(0, INITIAL_COUNT)
     }
 }
 function renderTwitterCardsSuccess(cards) {
@@ -190,7 +199,8 @@ function renderTwitterCardsSuccess(cards) {
         type: feedConstant.TWITTER_SUCCESS,
         tw_cards: cards,
         inst_cards: [],
-        vk_cards: []
+        vk_cards: [],
+        actual_cards: cards.slice(0, INITIAL_COUNT)
     }
 }
 function renderVKCardsSuccess(cards) {
@@ -198,7 +208,9 @@ function renderVKCardsSuccess(cards) {
         type: feedConstant.VK_SUCCESS,
         vk_cards: cards,
         inst_cards: [],
-        tw_cards: []
+        tw_cards: [],
+        actual_cards: cards.slice(0, INITIAL_COUNT)
     }
 }
+
 export default feedActions;

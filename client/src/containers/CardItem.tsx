@@ -44,7 +44,6 @@ export class CardItem extends React.Component<IProps, IState> {
         this.setState({ shorten: true })
     }
     public render() {
-        console.log(this.state)
         return (
             <Card
                 cover={this.props.image ? <img alt="example" src={this.props.image} /> : ""}
