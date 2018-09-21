@@ -30,7 +30,6 @@ class Search extends React.Component<IProps, IState>{
     public handleChange(value: any) {
         this.setState({ value: value });
         if (value.length === 0) {
-            console.log(value)
         } else if(value[0].substring(0,1) !== '#'){
             const tag = value[0].substring(0, 2);
             if (tag === 'vk') {
@@ -42,7 +41,6 @@ class Search extends React.Component<IProps, IState>{
             }
         } else if(value[0].substring(0,1) === '#'){
             const tag = value[0].substring(1,3);
-            console.log(tag)
             if (tag === 'vk') {
                 this.props.fetchDataVK(value[0].substring(3));
             } else if (tag === 'in') {

@@ -35,55 +35,16 @@ class Home extends React.Component<IProps, IState> {
       not_loading: true
     }
   }
-  /*componentWillMount() {
-    if (this.props.inst_cards.length !== 0) {
-      this.setState({ inst_cards: this.props.inst_cards.slice(0, INITIAL_COUNT), rendering: false });
-    } else if (this.props.vk_cards.length !== 0) {
-      this.setState({ vk_cards: this.props.vk_cards.slice(0, INITIAL_COUNT), rendering: false });
-    } else if (this.props.tw_cards.length !== 0) {
-      this.setState({ tw_cards: this.props.tw_cards.slice(0, INITIAL_COUNT), rendering: false });
-    }
-    console.log(this.state)
-  }*/
   renderCards() {
-    /*if (this.props.inst_cards.length !== 0) {
-      this.setState({ inst_cards: this.props.inst_cards.slice(0, INITIAL_COUNT), rendering: true });
-    } else if (this.props.vk_cards.length !== 0) {
-      this.setState({ vk_cards: this.props.vk_cards.slice(0, INITIAL_COUNT), rendering: true });
-    } else if (this.props.tw_cards.length !== 0) {
-      this.setState({ tw_cards: this.props.tw_cards.slice(0, INITIAL_COUNT), rendering: true });
-    }*/
-    /*if (this.state.inst_cards.length !== 0) {*/
-    console.log(this.props)
     return this.props.actual_cards.map((card, index): any => {
-      //this.setState({ rendering: false });
       return <CardItem key={index}
         {...card} />
     });
-    /* } else if (this.state.vk_cards.length !== 0) {
-       return this.state.vk_cards.map((card, index): any => {
-         this.setState({ rendering: false });
-         return <CardItem key={index}
-           {...card} />
-       });
-     } else if (this.state.tw_cards.length !== 0) {
-       return this.state.tw_card.map((card, index): any => {
-         this.setState({ rendering: false });
-         return <CardItem key={index}
-           {...card} />
-       });
-     }*/
-  }
-  public shouldComponentUpdate() {
-    console.log('should?')
-    console.log(this.state)
-    return !this.state.rendering
   }
   public onLoadMore() {
     this.props.loadMore();
   }
   public render() {
-    console.log(this.state)
     return (
       <div className="App">
         <Layout>

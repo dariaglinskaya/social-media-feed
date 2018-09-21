@@ -20,11 +20,9 @@ function loadMore() {
 function renderInstagramPost(tag) {
     return (dispatch) => {
         dispatch(cardsIsLoading());
-        console.log(`https://www.instagram.com/explore/tags/${tag}/?__a=1`)
         axios.get(`https://www.instagram.com/explore/tags/${tag}/?__a=1`)
             .catch(() => dispatch(renderCardsFailure()))
             .then((response) => {
-                console.log(response);
                 let result: any[] = [];
                 let ids: any[] = [];
                 response.data.graphql.hashtag.edge_hashtag_to_media.edges.forEach((item) => {
@@ -32,10 +30,6 @@ function renderInstagramPost(tag) {
                     if (item.node.edge_media_to_caption.edges[0] !== undefined) {
                         text = item.node.edge_media_to_caption.edges[0].node.text;
                     }
-                   /* axios.get(`https://api.instagram.com/v1/users/${item.node.owner.id}?access_token=311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f`)
-                        .then((response) => {
-                            console.log(response)
-                        })*/
                     result.push({
                         username: '#'+item.node.owner.id,
                         profile_picture: 'https://www.limestone.edu/sites/default/files/user.png',
@@ -73,7 +67,6 @@ function renderVKPost(tag) {
             .then(async (response) => {
                 let result: any[] = [];
                 let ids: any[] = [];
-                console.log(response)
                 response.data.forEach(async (item) => {
                     let image = '';
 
@@ -101,7 +94,6 @@ function renderVKPost(tag) {
                     result.push(res);
                 });
                 await getVKUsers(ids).then((users) => {
-                    console.log(users)
                     result.forEach((item) => {
                         users.forEach((user: any) => {
                             item.username = user.first_name + ' ' + user.last_name,
@@ -109,7 +101,6 @@ function renderVKPost(tag) {
                         })
                     });
                 });
-                console.log(result)
                 dispatch(renderVKCardsSuccess(result))
             })
             .catch(() => dispatch(renderCardsFailure()));
@@ -149,15 +140,11 @@ function renderTwitterPost(tag) {
         })
             .then((response) => {
                 let result: any[] = [];
-                console.log(response)
                 response.data.statuses.forEach((item) => {
                     let image = '';
                     if (item.entities.media !== undefined) {
-                        console.log(item)
-                        console.log(item.entities.media[0].media_url)
                         image = item.entities.media[0].media_url;
                     }
-                    console.log(image)
                     let res = {
                         username: item.user.screen_name,
                         profile_picture: item.user.profile_image_url,
