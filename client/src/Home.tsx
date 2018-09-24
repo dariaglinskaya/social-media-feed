@@ -1,4 +1,4 @@
-import { Layout, Row, Spin, Button } from 'antd';
+import { Layout, Row, Spin, Button, BackTop } from 'antd';
 import * as React from 'react';
 import { Col as _Col } from 'antd';
 const Col = _Col as any;
@@ -64,6 +64,7 @@ class Home extends React.Component<IProps, IState> {
                     <Button onClick={this.onLoadMore.bind(this)}>load more</Button>
                   </div>
                 ) : <Spin />}
+                <BackTop />
               </Content>
             </Col>
           </Row>

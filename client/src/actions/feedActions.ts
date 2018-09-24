@@ -1,8 +1,6 @@
 import { feedConstant } from '../constants/feedConstants'
 import axios from 'axios';
 
-const INITIAL_COUNT = 5;
-
 const feedActions = {
     renderCardsFailure,
     renderInstagramCardsSuccess,
@@ -17,7 +15,9 @@ function loadMore() {
         isLoading: true
     }
 }
+
 function renderInstagramPost(tag) {
+    console.log('instagram')
     return (dispatch) => {
         dispatch(cardsIsLoading());
         axios.get(`https://www.instagram.com/explore/tags/${tag}/?__a=1`)
@@ -31,21 +31,20 @@ function renderInstagramPost(tag) {
                         text = item.node.edge_media_to_caption.edges[0].node.text;
                     }
                     result.push({
-                        username: '#'+item.node.owner.id,
+                        source: 'instagram',
+                        username: '#' + item.node.owner.id,
                         profile_picture: 'https://www.limestone.edu/sites/default/files/user.png',
                         image: item.node.display_url,
                         likes: item.node.edge_liked_by.count,
                         text: text,
-                        shorten_text: text.length > 150 ? text.substring(0,150) : text,
+                        shortcode: item.node.shortcode,
+                        date: new Date(item.node.taken_at_timestamp * 1000),
+                        shorten_text: text.length > 150 ? text.substring(0, 150) : text,
                         comments: item.node.edge_media_to_comment.count
                     });
                     ids.push(item.node.owner.id);
                 });
-                result.forEach((item) => {
-                    
-                });
                 dispatch(renderInstagramCardsSuccess(result));
-
             })
 
     };
@@ -65,6 +64,7 @@ function renderVKPost(tag) {
             data: res
         })
             .then(async (response) => {
+                console.log(response)
                 let result: any[] = [];
                 let ids: any[] = [];
                 response.data.forEach(async (item) => {
@@ -78,12 +78,15 @@ function renderVKPost(tag) {
                         }
                     }
                     let res = {
+                        source: 'vk',
                         username: item.owner_id,
                         profile_picture: item.owner_id,
                         image: image,
+                        shortcode: item.owner_id + '_' + item.id,
                         likes: item.likes.count,
                         text: item.text,
-                        shorten_text: item.text.length > 150 ? item.text.substring(0,150) : item.text,
+                        date: new Date(item.date * 1000),
+                        shorten_text: item.text.length > 150 ? item.text.substring(0, 150) : item.text,
                         comments: item.comments.count
                     };
                     if (item.owner_id < 0) {
@@ -146,11 +149,14 @@ function renderTwitterPost(tag) {
                         image = item.entities.media[0].media_url;
                     }
                     let res = {
+                        source: 'twitter',
+                        shortcode: item.entities.urls[0].expanded_url,
                         username: item.user.screen_name,
                         profile_picture: item.user.profile_image_url,
                         image: image,
                         text: item.text,
-                        shorten_text: item.text.length > 150 ? item.text.substring(0,150) : item.text,
+                        date: new Date(item.created_at),
+                        shorten_text: item.text.length > 150 ? item.text.substring(0, 150) : item.text,
                         comments: item.retweet_count
                     };
                     result.push(res);
@@ -175,28 +181,19 @@ function renderCardsFailure() {
 function renderInstagramCardsSuccess(cards) {
     return {
         type: feedConstant.INSTAGRAM_SUCCESS,
-        inst_cards: cards,
-        vk_cards: [],
-        tw_cards: [],
-        actual_cards: cards.slice(0, INITIAL_COUNT)
+        inst_cards: cards
     }
 }
 function renderTwitterCardsSuccess(cards) {
     return {
         type: feedConstant.TWITTER_SUCCESS,
-        tw_cards: cards,
-        inst_cards: [],
-        vk_cards: [],
-        actual_cards: cards.slice(0, INITIAL_COUNT)
+        tw_cards: cards
     }
 }
 function renderVKCardsSuccess(cards) {
     return {
         type: feedConstant.VK_SUCCESS,
-        vk_cards: cards,
-        inst_cards: [],
-        tw_cards: [],
-        actual_cards: cards.slice(0, INITIAL_COUNT)
+        vk_cards: cards
     }
 }
 

@@ -10,36 +10,40 @@ const INITIAL_STATE = {
     isLoading: false
 }
 export function feed(state = INITIAL_STATE, action) {
+    const all_cards = state.inst_cards.concat(state.vk_cards, state.tw_cards);
+    const sorted_cards = all_cards.sort((a, b) => {
+        return b.date.getTime() - a.date.getTime()
+    });
     switch (action.type) {
         case feedConstant.INSTAGRAM_SUCCESS: {
+            console.log(state.inst_cards.concat(state.vk_cards, state.tw_cards));
+            console.log(all_cards);
             return {
                 ...state,
                 inst_cards: action.inst_cards,
-                vk_cards: [],
-                tw_cards: [],
-                actual_cards: action.actual_cards,
+                actual_cards: sorted_cards.slice(0, INITIAL_COUNT),
                 isLoading: false,
                 fetchSuccess: true
             }
         }
         case feedConstant.VK_SUCCESS: {
+            console.log(state.inst_cards.concat(state.vk_cards, state.tw_cards));
+            console.log(all_cards);
             return {
                 ...state,
                 vk_cards: action.vk_cards,
-                inst_cards: [],
-                tw_cards: [],
-                actual_cards: action.actual_cards,
+                actual_cards: sorted_cards.slice(0, INITIAL_COUNT),
                 isLoading: false,
                 fetchSuccess: true
             }
         }
         case feedConstant.TWITTER_SUCCESS: {
+            console.log(state.inst_cards.concat(state.vk_cards, state.tw_cards));
+            console.log(all_cards);
             return {
                 ...state,
-                vk_cards: [],
-                inst_cards: [],
                 tw_cards: action.tw_cards,
-                actual_cards: action.actual_cards,
+                actual_cards: sorted_cards.slice(0, INITIAL_COUNT),
                 isLoading: false,
                 fetchSuccess: true
             }
@@ -63,14 +67,7 @@ export function feed(state = INITIAL_STATE, action) {
             }
         }
         case feedConstant.LOAD_MORE: {
-            let cards = [];
-            if (state.inst_cards.length !== 0) {
-                cards = state.actual_cards.concat(state.inst_cards.slice(state.actual_cards.length, state.actual_cards.length + INITIAL_COUNT));
-            } else if (state.vk_cards.length !== 0) {
-                cards = state.actual_cards.concat(state.vk_cards.slice(state.actual_cards.length, state.actual_cards.length + INITIAL_COUNT));
-            } else if (state.tw_cards.length !== 0) {
-                cards = state.actual_cards.concat(state.tw_cards.slice(state.actual_cards.length, state.actual_cards.length + INITIAL_COUNT));
-            }
+            const cards = state.actual_cards.concat(all_cards.slice(state.actual_cards.length, state.actual_cards.length + INITIAL_COUNT));
             return {
                 ...state,
                 isLoading: false,

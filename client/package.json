@@ -11,6 +11,8 @@
     "@types/node": "^10.10.0",
     "antd": "^3.9.2",
     "axios": "^0.18.0",
+    "big-integer": "^1.6.36",
+    "moment": "^2.22.2",
     "react": "^16.4.2",
     "react-dom": "^16.5.0",
     "react-redux": "^5.0.7",
