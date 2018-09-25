@@ -147,6 +147,12 @@ function renderTwitterPost(tag) {
                     let image = '';
                     if (item.entities.media !== undefined) {
                         image = item.entities.media[0].media_url;
+                    } else if (item.retweeted_status !== undefined) {
+                        if(item.retweeted_status.entities !== undefined) {
+                            if(item.retweeted_status.entities.media !== undefined) {
+                                image = item.retweeted_status.entities.media[0].media_url;
+                            }
+                        }
                     }
                     let res = {
                         source: 'twitter',
