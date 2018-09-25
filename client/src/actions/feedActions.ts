@@ -64,7 +64,6 @@ function renderVKPost(tag) {
             data: res
         })
             .then(async (response) => {
-                console.log(response)
                 let result: any[] = [];
                 let ids: any[] = [];
                 response.data.forEach(async (item) => {
@@ -142,6 +141,7 @@ function renderTwitterPost(tag) {
             data: res
         })
             .then((response) => {
+                console.log(response)
                 let result: any[] = [];
                 response.data.statuses.forEach((item) => {
                     let image = '';
@@ -150,7 +150,7 @@ function renderTwitterPost(tag) {
                     }
                     let res = {
                         source: 'twitter',
-                        shortcode: item.entities.urls[0].expanded_url,
+                        shortcode: item.user.screen_name+'/status/'+item.id_str,
                         username: item.user.screen_name,
                         profile_picture: item.user.profile_image_url,
                         image: image,
@@ -161,6 +161,7 @@ function renderTwitterPost(tag) {
                     };
                     result.push(res);
                 });
+                console.log(result)
                 dispatch(renderTwitterCardsSuccess(result));
             })
             .catch(() => dispatch(renderCardsFailure()));

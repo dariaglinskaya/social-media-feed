@@ -60,7 +60,7 @@ export class CardItem extends React.Component<IProps, IState> {
                 <IconText type="message" key={2} text={this.props.comments} />,
                 <IconText type="calendar" key={2} text={moment(this.props.date).format('MM/DD/YYYY hh:mm:ss')} />,
                 this.props.source === 'instagram' ? <IconLink type="instagram" theme="outlined" link={`https://www.instagram.com/p/${this.props.shortcode}`}/> : 
-                this.props.source === 'twitter' ? <IconLink type="twitter" theme="outlined" link={this.props.shortcode}/> :
+                this.props.source === 'twitter' ? <IconLink type="twitter" theme="outlined" link={`https://twitter.com/`+this.props.shortcode}/> :
                 <IconLink type="bold" theme="outlined" link={`https://vk.com/feed?w=wall${this.props.shortcode}`}/>               
                 ]}
                 className="card-item"

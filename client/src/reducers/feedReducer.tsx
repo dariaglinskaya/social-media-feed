@@ -16,8 +16,6 @@ export function feed(state = INITIAL_STATE, action) {
     });
     switch (action.type) {
         case feedConstant.INSTAGRAM_SUCCESS: {
-            console.log(state.inst_cards.concat(state.vk_cards, state.tw_cards));
-            console.log(all_cards);
             return {
                 ...state,
                 inst_cards: action.inst_cards,
@@ -27,8 +25,6 @@ export function feed(state = INITIAL_STATE, action) {
             }
         }
         case feedConstant.VK_SUCCESS: {
-            console.log(state.inst_cards.concat(state.vk_cards, state.tw_cards));
-            console.log(all_cards);
             return {
                 ...state,
                 vk_cards: action.vk_cards,
@@ -38,8 +34,6 @@ export function feed(state = INITIAL_STATE, action) {
             }
         }
         case feedConstant.TWITTER_SUCCESS: {
-            console.log(state.inst_cards.concat(state.vk_cards, state.tw_cards));
-            console.log(all_cards);
             return {
                 ...state,
                 tw_cards: action.tw_cards,
