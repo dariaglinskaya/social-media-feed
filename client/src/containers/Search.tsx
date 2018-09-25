@@ -1,8 +1,9 @@
-import { Icon, Input } from 'antd';
+import { Icon, Input as _Input } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import feedActions from '../actions/feedActions';
+const Input = _Input as any;
 const SearchInput = Input.Search;
 
 interface IProps {
