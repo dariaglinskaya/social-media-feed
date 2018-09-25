@@ -1,20 +1,10 @@
-import { Select, Icon } from 'antd';
+import { Icon, Input } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import feedActions from '../actions/feedActions';
-const Option = Select.Option;
+const SearchInput = Input.Search;
 
-const children: any = [];
-for (let i = 10; i < 20; i++) {
-    children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-}
-const IconText = ({ type, text }) => (
-    <span>
-        <Icon type={type} style={{ marginRight: 8 }} />
-        {text}
-    </span>
-);
 interface IProps {
     fetchDataVK?: any;
     fetchDataInst?: any;
@@ -49,14 +39,11 @@ class Search extends React.Component<IProps, IState>{
     public render() {
         return (
             <div>
-                <Select
-                    mode="tags"
-                    autoFocus={true}
-                    showArrow={true}
-                    showSearch={true}
+                <SearchInput
+                    placeholder="Search by tag. #minsk #nasa #programming" 
+                    onSearch={this.handleChange.bind(this)}
                     style={{ width: '100%' }}
-                    placeholder={<IconText type="search" text="Search by tag. #minsk #nasa #programming" />}
-                    onChange={this.handleChange.bind(this)}
+                    prefix={<Icon type="tag" theme="outlined" />}
                 />
             </div>
         );

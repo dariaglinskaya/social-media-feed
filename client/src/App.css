@@ -7,8 +7,11 @@
   overflow: hidden;
   display: block;
 }
-.content {
-  
+.ant-layout-header {
+  background: #001529;
+  padding: 0 0; 
+}
+.content {  
   min-height: calc(100vh - (64px + 69px));
   background-color: white;
   padding: 20px 0;
