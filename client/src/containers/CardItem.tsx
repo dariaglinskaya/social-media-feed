@@ -27,11 +27,9 @@ const IconText = ({ type, text, key }) => (
     </span>
 );
 const IconLink = ({ type, theme, link }) => (
-    <span>
         <a href={link} target="_blank">
             <Icon type={type} theme={theme} style={{ marginRight: 8, fontSize: '20px' }} />
         </a>
-    </span>
 );
 export class CardItem extends React.Component<IProps, IState> {
     public state: any;
