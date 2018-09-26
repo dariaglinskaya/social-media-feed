@@ -28,20 +28,20 @@ class Search extends React.Component<IProps, IState>{
         this.setState({ value: value });
         if (value.length === 0) {
         } else if (value[0].substring(0, 1) !== '#') {
-            this.props.fetchDataVK(value[0]);
-            this.props.fetchDataTwitter(value[0]);
-            this.props.fetchDataInst(value[0]);
+            this.props.fetchDataVK(value);
+            this.props.fetchDataTwitter(value);
+            this.props.fetchDataInst(value);
         } else if (value[0].substring(0, 1) === '#') {
-            this.props.fetchDataVK(value[0].substring(1));
-            this.props.fetchDataTwitter(value[0].substring(1));
-            this.props.fetchDataInst(value[0].substring(1));
+            this.props.fetchDataVK(value.substring(1));
+            this.props.fetchDataTwitter(value.substring(1));
+            this.props.fetchDataInst(value.substring(1));
         }
     }
     public render() {
         return (
             <div>
                 <SearchInput
-                    placeholder="Search by tag. #minsk #nasa #programming" 
+                    placeholder="Search by tag. #minsk #nasa #programming"
                     onSearch={this.handleChange.bind(this)}
                     style={{ width: '100%' }}
                     prefix={<Icon type="tag" theme="outlined" />}
