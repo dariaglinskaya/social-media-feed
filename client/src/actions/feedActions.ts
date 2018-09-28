@@ -17,7 +17,6 @@ function loadMore() {
 }
 
 function renderInstagramPost(tag) {
-    console.log('instagram')
     return (dispatch) => {
         dispatch(cardsIsLoading());
         axios.get(`https://www.instagram.com/explore/tags/${tag}/?__a=1`)
@@ -141,7 +140,6 @@ function renderTwitterPost(tag) {
             data: res
         })
             .then((response) => {
-                console.log(response)
                 let result: any[] = [];
                 response.data.statuses.forEach((item) => {
                     let image = '';
@@ -167,7 +165,6 @@ function renderTwitterPost(tag) {
                     };
                     result.push(res);
                 });
-                console.log(result)
                 dispatch(renderTwitterCardsSuccess(result));
             })
             .catch(() => dispatch(renderCardsFailure()));

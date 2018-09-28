@@ -68,7 +68,7 @@ export class CardItem extends React.Component<IProps, IState> {
                 <Meta
                     avatar={<Avatar src={this.props.profile_picture} />}
                     title={<span>{this.props.username}</span>}
-                    description={this.state.shorten ? [this.props.shorten_text, <a onClick={this.loadMore.bind(this)}>... Load more</a>] : [this.props.text, <a onClick={this.loadLess.bind(this)}>Load less</a>]}
+                    description={this.state.shorten ? [this.props.shorten_text, <a onClick={this.loadMore.bind(this)}>... Load more</a>] : [this.props.text, <a onClick={this.loadLess.bind(this)}> Load less</a>]}
                 />
             </Card>
         )

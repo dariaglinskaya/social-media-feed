@@ -20,9 +20,7 @@ export default class App extends React.Component<IAppProps, {}> {
   }
 }
 const ConnectedApp = connect((state) => {
-  console.log("State");
   console.log(state);
-  console.log("Store");
   console.log(store);
   return state;
 })(App);
