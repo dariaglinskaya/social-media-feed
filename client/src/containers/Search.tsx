@@ -1,8 +1,13 @@
-import { Icon, Input as _Input } from 'antd';
 import * as React from 'react';
+
+import { Icon, Input as _Input } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import feedActions from '../actions/feedActions';
+
+import instagramActions from '../actions/instagram';
+import twitterActions from '../actions/twitter';
+import vkActions from '../actions/vk';
+
 const Input = _Input as any;
 const SearchInput = Input.Search;
 
@@ -56,9 +61,9 @@ const mapStateToProps = state => {
     };
 };
 const mapDispatchToProps = dispatch => {
-    const fetchDataVK = (tag) => feedActions.renderVKPost(tag);
-    const fetchDataInst = (tag) => feedActions.renderInstagramPost(tag);
-    const fetchDataTwitter = (tag) => feedActions.renderTwitterPost(tag);
+    const fetchDataVK = (tag) => vkActions.renderVKPost(tag);
+    const fetchDataInst = (tag) => instagramActions.renderInstagramPost(tag);
+    const fetchDataTwitter = (tag) => twitterActions.renderTwitterPost(tag);
     return {
         ...bindActionCreators({ fetchDataVK, fetchDataInst, fetchDataTwitter }, dispatch)
     };

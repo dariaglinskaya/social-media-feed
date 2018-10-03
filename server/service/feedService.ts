@@ -23,19 +23,6 @@ const client = new Twitter({
 @injectable()
 export class FeedService implements IFeedService {
 
-    async getUserByIDInstagram(id): Promise<any> {
-        var ig = instagram.instagram();
-        ig.use({ access_token: '311463581.bb70807.dd7c338aa30d4c858ff97f19446d1a1f' });
-        return await new Promise((resolve, reject) => {
-            ig.user(id, (err, result) => {
-                if (!err) {
-                    resolve(result);
-                } else {
-                    reject(err.error_message);
-                }
-            })
-        })
-    }
     async getFeedsTwitter(tag): Promise<any> {
         return await new Promise<ICard[]>((resolve, reject) => {
             client.get('search/tweets', { q: '#' + tag.tag, count: 50 }, (error, tweets, response) => {

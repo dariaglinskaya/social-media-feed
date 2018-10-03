@@ -1,12 +1,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import './index.css';
-import Home from './Home';
-import store from "./store";
-
-import registerServiceWorker from './registerServiceWorker';
 
 import { connect, Provider } from 'react-redux';
+
+import Home from './Home';
+import store from "./store";
+import registerServiceWorker from './registerServiceWorker';
+
+import './index.css';
+
 
 interface IStateProps { }
 interface IActionProps { }
@@ -20,7 +22,7 @@ export default class App extends React.Component<IAppProps, {}> {
   }
 }
 const ConnectedApp = connect((state) => {
-  console.log(state);
+  console.log(state); 
   console.log(store);
   return state;
 })(App);
