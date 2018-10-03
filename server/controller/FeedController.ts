@@ -16,14 +16,6 @@ class FeedController {
     constructor(@inject(TYPES.FeedService) private feedService: IFeedService) {
         this._feedService = feedService;
     }
-    @httpPost('/instagram')
-    async instagram(@request() req, @response() res) {
-        await req.body.forEach(async (item) => {
-            await this._feedService.getUserByIDInstagram('311463581').then((result) => {
-                res.json(result);
-            })
-        });
-    }
     @httpPost('/twitter')
     async twitter(@request() req, @response() res) {
         await this._feedService.getFeedsTwitter(req.body).then((cards) => {
